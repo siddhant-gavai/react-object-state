@@ -1,21 +1,22 @@
 # 🎲 LudoBoard - Day 4 (React useState Practice)
 
-This mini React project demonstrates how to manage **multiple related state values** using a **single object** inside the `useState` hook.
+This mini React project demonstrates how to manage **multiple related state values** using both a **single object** and an **array** inside the `useState` hook.
 
 ---
 
 ## 📌 What I Learned
 
-- Managing multiple pieces of state (blue, red, yellow, green moves) inside one object
-- Updating specific keys in the object using the spread operator
-- Using functional form of `setState` to get the previous value
-- Creating separate update functions for each move color
+- Managing multiple color-wise counters using an object state
+- Tracking move history using an array state
+- Using the spread operator to preserve previous state while updating
+- Creating individual update functions for each color
+- Updating state based on the previous state using the functional form of `setState`
 
 ---
 
 ## 🧠 Key Concepts
 
-### ✅ useState with Object
+### ✅ Object-based State
 
 ```js
 const [Moves, setMoves] = useState({
@@ -24,4 +25,8 @@ const [Moves, setMoves] = useState({
   red: 0,
   green: 0,
 });
+
+🔧 How to Run
+npm install
+npm run dev
 ```
