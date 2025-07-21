@@ -26,6 +26,30 @@ const [Moves, setMoves] = useState({
   green: 0,
 });
 
+
+ # 📝 Todo List -  (React useState Practice)
+
+This mini React project demonstrates how to build a functional **Todo List** using the `useState` hook. The app allows users to add tasks and displays them in a neatly styled interface.
+
+---
+
+## 📌 What I Learned
+
+- Using `useState` to manage string and array state
+- Handling user input with controlled components
+- Updating array state immutably using the spread operator
+- Rendering dynamic lists using `.map()`
+- Styling React components using inline CSS
+
+---
+
+## 🧠 Key Concepts
+
+### 🔹 Input State
+
+
+const [newTask, setNewTask] = useState("");
+
 🔧 How to Run
 npm install
 npm run dev
