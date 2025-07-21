@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 const TodoList = () => {
   const containerStyle = {
     maxWidth: "400px",
@@ -35,11 +37,11 @@ const TodoList = () => {
     textAlign: "center",
     color: "#333",
   };
-  let [tasks, setTasks] = useState(["Buy groceries", "Walk the dog"]);
+  let [tasks, setTasks] = useState([{ task: "Sample Task", id: uuidv4() }]);
   let [newTask, setNewTask] = useState("");
 
   const addTask = () => {
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, { task: newTask, id: uuidv4() }]);
     setNewTask("");
   };
 
@@ -62,8 +64,8 @@ const TodoList = () => {
       <h2 style={headingStyle}>📝 Todo List</h2>
       <ul>
         {tasks.map((tasks, index) => (
-          <li key={index} style={{ margin: "10px 0", color: "#555" }}>
-            {tasks}
+          <li key={tasks.id} style={{ margin: "10px 0", color: "#555" }}>
+            {tasks.task}
           </li>
         ))}
       </ul>
