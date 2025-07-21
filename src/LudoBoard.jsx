@@ -7,10 +7,14 @@ const LudoBoard = () => {
     red: 0,
     green: 0,
   });
+  let [arr, setArr] = useState(["No moves yet"]);
 
   const updateBlue = () => {
     setMoves((preValue) => {
       return { ...preValue, blue: preValue.blue + 1 };
+    });
+    setArr((preValue) => {
+      return [...preValue, `Blue moved to ${Moves.blue + 1}`];
     });
   };
 
@@ -34,8 +38,10 @@ const LudoBoard = () => {
   return (
     <div className="ludo-board">
       <p>Game begins </p>
+      <p> {arr} </p>
       <div className="board">
         <p>Blue Moves {Moves.blue} </p>
+
         <button
           style={{ backgroundColor: "blue", color: "white", padding: "10px" }}
           onClick={updateBlue}
