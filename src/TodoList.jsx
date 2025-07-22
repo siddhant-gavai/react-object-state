@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const TodoList = () => {
   const containerStyle = {
-    maxWidth: "400px",
+    maxWidth: "500px",
     margin: "50px auto",
     padding: "20px",
     border: "2px solid #ccc",
@@ -23,13 +23,24 @@ const TodoList = () => {
   };
 
   const buttonStyle = {
-    padding: "10px 20px",
-    fontSize: "16px",
+    padding: "8px 14px",
+    fontSize: "14px",
     borderRadius: "5px",
     backgroundColor: "#4caf50",
     color: "white",
     border: "none",
     cursor: "pointer",
+    marginRight: "8px",
+    whiteSpace: "nowrap",
+  };
+
+  const actionButtonStyle = {
+    padding: "6px 10px",
+    fontSize: "13px",
+    borderRadius: "4px",
+    border: "none",
+    cursor: "pointer",
+    marginLeft: "6px",
   };
 
   const headingStyle = {
@@ -37,34 +48,67 @@ const TodoList = () => {
     textAlign: "center",
     color: "#333",
   };
-  const deleteBUttonStyle = {
-    margin: "10px 10px",
-    color: "#fff",
-    padding: "10px 16px",
-    border: "none",
-    borderRadius: "8px",
-    backgroundColor: "#ff4d4d",
-    cursor: "pointer",
-    fontSize: "15px",
-    fontWeight: "500",
-    transition: "background-color 0.3s ease",
+
+  const taskItemStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottom: "1px solid #ddd",
+    padding: "8px 0",
   };
 
-  let [tasks, setTasks] = useState([{ task: "Sample Task", id: uuidv4() }]);
+  const taskTextStyle = (done) => ({
+    textDecoration: done ? "line-through" : "none",
+    flex: "1",
+    marginRight: "10px",
+    fontSize: "15px",
+    color: "#333",
+  });
+
+  let [tasks, setTasks] = useState([
+    { task: "Code", id: uuidv4(), done: false },
+  ]);
   let [newTask, setNewTask] = useState("");
 
   const addTask = () => {
-    setTasks((preValues) => {
-      return [...preValues, { task: newTask, id: uuidv4() }];
-    });
-    setNewTask("");
+    if (newTask.trim() !== "") {
+      setTasks((preValues) => [
+        ...preValues,
+        { task: newTask, id: uuidv4(), done: false },
+      ]);
+      setNewTask("");
+    }
   };
 
-  let updateTaskValue = (event) => {
-    setNewTask(event.target.value);
-  };
+  const updateTaskValue = (e) => setNewTask(e.target.value);
+
   const deleteTask = (id) => {
-    setTasks((preValue) => tasks.filter((preValue) => preValue.id !== id));
+    setTasks((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const upercaseAll = () => {
+    setTasks((prev) =>
+      prev.map((todo) => ({
+        ...todo,
+        task: todo.task.toUpperCase(),
+      }))
+    );
+  };
+
+  const upercaseOne = (id) => {
+    setTasks((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, task: todo.task.toUpperCase() } : todo
+      )
+    );
+  };
+
+  const markDone = (id) => {
+    setTasks((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
+    );
   };
 
   return (
@@ -80,19 +124,56 @@ const TodoList = () => {
         Add Task
       </button>
       <h2 style={headingStyle}>📝 Todo List</h2>
-      <ul>
-        {tasks.map((tasks, index) => (
-          <li key={tasks.id} style={{ margin: "10px 0", color: "#555" }}>
-            <span>{tasks.task}</span>
-            <button
-              onClick={() => deleteTask(tasks.id)}
-              style={deleteBUttonStyle}
-            >
-              ❌ Delete
-            </button>
+      <ul style={{ padding: 0, listStyle: "none" }}>
+        {tasks.map((todo) => (
+          <li key={todo.id} style={taskItemStyle}>
+            <span style={taskTextStyle(todo.done)}>{todo.task}</span>
+            <div style={{ display: "flex" }}>
+              <button
+                onClick={() => markDone(todo.id)}
+                style={{
+                  ...actionButtonStyle,
+                  backgroundColor: "#2196f3",
+                  color: "white",
+                }}
+              >
+                ✔️
+              </button>
+              <button
+                onClick={() => upercaseOne(todo.id)}
+                style={{
+                  ...actionButtonStyle,
+                  backgroundColor: "#9c27b0",
+                  color: "white",
+                }}
+              >
+                Aa↗️
+              </button>
+              <button
+                onClick={() => deleteTask(todo.id)}
+                style={{
+                  ...actionButtonStyle,
+                  backgroundColor: "#ff4d4d",
+                  color: "white",
+                }}
+              >
+                ❌
+              </button>
+            </div>
           </li>
         ))}
       </ul>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <button onClick={upercaseAll} style={buttonStyle}>
+          UPPERCASE ALL
+        </button>
+        <button
+          onClick={() => setTasks([])}
+          style={{ ...buttonStyle, backgroundColor: "#e91e63" }}
+        >
+          CLEAR ALL
+        </button>
+      </div>
     </div>
   );
 };
