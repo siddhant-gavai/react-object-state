@@ -43,6 +43,8 @@ This mini React project demonstrates how to build a functional **Todo List** usi
 - Styling React components using inline CSS
 - Used `.filter()` method to remove the task by its `id`
 - Styled buttons, inputs, and layout using inline CSS
+- Added markDone functionality to toggle task completion with a strike-through
+- Used uuid package to generate unique task IDs
 
 ---
 
