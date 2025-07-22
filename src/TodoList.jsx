@@ -37,16 +37,34 @@ const TodoList = () => {
     textAlign: "center",
     color: "#333",
   };
+  const deleteBUttonStyle = {
+    margin: "10px 10px",
+    color: "#fff",
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: "8px",
+    backgroundColor: "#ff4d4d",
+    cursor: "pointer",
+    fontSize: "15px",
+    fontWeight: "500",
+    transition: "background-color 0.3s ease",
+  };
+
   let [tasks, setTasks] = useState([{ task: "Sample Task", id: uuidv4() }]);
   let [newTask, setNewTask] = useState("");
 
   const addTask = () => {
-    setTasks([...tasks, { task: newTask, id: uuidv4() }]);
+    setTasks((preValues) => {
+      return [...preValues, { task: newTask, id: uuidv4() }];
+    });
     setNewTask("");
   };
 
   let updateTaskValue = (event) => {
     setNewTask(event.target.value);
+  };
+  const deleteTask = (id) => {
+    setTasks((preValue) => tasks.filter((preValue) => preValue.id !== id));
   };
 
   return (
@@ -65,7 +83,13 @@ const TodoList = () => {
       <ul>
         {tasks.map((tasks, index) => (
           <li key={tasks.id} style={{ margin: "10px 0", color: "#555" }}>
-            {tasks.task}
+            <span>{tasks.task}</span>
+            <button
+              onClick={() => deleteTask(tasks.id)}
+              style={deleteBUttonStyle}
+            >
+              ❌ Delete
+            </button>
           </li>
         ))}
       </ul>
