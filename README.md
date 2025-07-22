@@ -12,8 +12,6 @@ This mini React project demonstrates how to manage **multiple related state valu
 - Creating individual update functions for each color
 - Updating state based on the previous state using the functional form of `setState`
 - Implemented delete functionality to remove tasks from the list
-- Used `.filter()` method to remove the task by its `id`
-- Styled buttons, inputs, and layout using inline CSS
 
 ---
 
@@ -43,6 +41,8 @@ This mini React project demonstrates how to build a functional **Todo List** usi
 - Updating array state immutably using the spread operator
 - Rendering dynamic lists using `.map()`
 - Styling React components using inline CSS
+- Used `.filter()` method to remove the task by its `id`
+- Styled buttons, inputs, and layout using inline CSS
 
 ---
 
