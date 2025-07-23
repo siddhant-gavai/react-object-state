@@ -54,7 +54,7 @@ const TodoList = () => {
     alignItems: "center",
     justifyContent: "space-between",
     borderBottom: "1px solid #ddd",
-    padding: "8px 0",
+    padding: "10px 0",
   };
 
   const taskTextStyle = (done) => ({
